@@ -1,0 +1,33 @@
+{
+  "id": "T-crosscheck-both-sides-2",
+  "title": "文案不含延期条款而接口区间更宽：判 conflict 并附免责句",
+  "note": "note 写 10/22 至 10/26 且没有延期条款，接口返回 10/22 至 10/30 —— 文案没授权延长，必须标冲突。",
+  "steps": [
+    {
+      "do": "script",
+      "script": "note_locate.py",
+      "capture": "cross",
+      "args": [
+        "--crosscheck",
+        "--note",
+        "tests/fixtures/note-no-extension.json",
+        "--api",
+        "tests/fixtures/api-snapshot.json"
+      ],
+      "expect": {"exit": 0}
+    }
+  ],
+  "assertions": [
+    {"type": "output_contains", "on": "cross", "text": "⚠️ 冲突"},
+    {"type": "output_contains", "on": "cross", "text": "以门店最终确认为准"},
+    {"type": "output_contains", "on": "cross", "text": "所有校验以预约/下单接口返回结果为准"},
+    {"type": "output_not_contains", "on": "cross", "text": "官方文案原文含延期条款"},
+    {"type": "output_not_contains", "on": "cross", "text": "以接口数据为准"},
+    {"type": "output_contains", "on": "cross", "text": "门店排期"},
+    {"type": "output_contains", "on": "cross", "text": "并非数据错误"},
+    {"type": "output_contains", "on": "cross", "text": "不同门店可约范围可能不同"},
+    {"type": "output_contains", "on": "cross", "text": "以该门店预约页面为准"},
+    {"type": "output_not_contains", "on": "cross", "text": "有误"},
+    {"type": "output_not_contains", "on": "cross", "text": "异常"}
+  ]
+}

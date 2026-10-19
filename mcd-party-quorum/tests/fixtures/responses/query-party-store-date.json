@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "code": 200,
+  "message": "请求成功",
+  "data": [
+    {"date": "2026-10-22", "spuId": 91001, "storeCode": "9001001"},
+    {"date": "2026-10-23", "spuId": 91001, "storeCode": "9001001"},
+    {"date": "2026-10-24", "spuId": 91001, "storeCode": "9001001"},
+    {"date": "2026-10-25", "spuId": 91001, "storeCode": "9001001"},
+    {"date": "2026-10-26", "spuId": 91001, "storeCode": "9001001"},
+    {"date": "2026-10-27", "spuId": 91001, "storeCode": "9001001"},
+    {"date": "2026-10-28", "spuId": 91001, "storeCode": "9001001"},
+    {"date": "2026-10-29", "spuId": 91001, "storeCode": "9001001"},
+    {"date": "2026-10-30", "spuId": 91001, "storeCode": "9001001"}
+  ]
+}

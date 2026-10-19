@@ -1,0 +1,13 @@
+{
+  "fields": {
+    "code": {"value": "330100", "source": "api"},
+    "count": {"value": 3, "source": "user"},
+    "dateStr": {"value": "2026-10-23", "source": "api"},
+    "id": {"value": 37220241, "source": "api"},
+    "leftNum": {"value": 12, "source": "api"},
+    "partyType": {"value": 2, "source": "user"},
+    "skuId": {"value": 91011, "source": "api"},
+    "spuId": {"value": 91001, "source": "api"},
+    "storeCode": {"value": "9001001", "source": "api"}
+  }
+}

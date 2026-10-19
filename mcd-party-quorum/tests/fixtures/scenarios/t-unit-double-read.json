@@ -1,0 +1,38 @@
+{
+  "id": "T-unit-double-read",
+  "title": "上下架时间字段双读：两组都在优先 upDate 与 downDate，只有回退组时用它，两组都缺退出码 2 并报缺字段名",
+  "steps": [
+    {
+      "do": "script",
+      "script": "party_fields.py",
+      "capture": "both",
+      "args": ["--sale-window", "--file", "tests/fixtures/window-both.json", "--json"],
+      "expect": {"exit": 0}
+    },
+    {
+      "do": "script",
+      "script": "party_fields.py",
+      "capture": "fallback",
+      "args": ["--sale-window", "--file", "tests/fixtures/window-fallback.json", "--json"],
+      "expect": {"exit": 0}
+    },
+    {
+      "do": "script",
+      "script": "party_fields.py",
+      "capture": "none",
+      "args": ["--sale-window", "--file", "tests/fixtures/window-none.json"],
+      "expect": {"exit": 2}
+    }
+  ],
+  "assertions": [
+    {"type": "json_path_equals", "on": "both", "path": "window_source", "value": "upDate/downDate"},
+    {"type": "json_path_equals", "on": "both", "path": "up", "value": "2026-10-17 10:30:00"},
+    {"type": "json_path_equals", "on": "both", "path": "down", "value": "2026-10-25 23:49:59"},
+    {"type": "json_path_equals", "on": "fallback", "path": "window_source", "value": "upTime/downTime"},
+    {"type": "output_contains", "on": "none#stderr", "text": "upDate"},
+    {"type": "output_contains", "on": "none#stderr", "text": "downDate"},
+    {"type": "output_contains", "on": "none#stderr", "text": "upTime"},
+    {"type": "output_contains", "on": "none#stderr", "text": "downTime"},
+    {"type": "output_contains", "on": "none#stderr", "text": "不猜"}
+  ]
+}

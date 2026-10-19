@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "code": 200,
+  "message": "请求成功",
+  "data": [
+    {
+      "id": 37220241,
+      "timeStart": "11:00",
+      "timeEnd": "12:30",
+      "price": 5900,
+      "leftNum": 12,
+      "partyMin": 5,
+      "partyMax": 12
+    }
+  ]
+}

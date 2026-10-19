@@ -1,0 +1,22 @@
+{
+  "id": "C5",
+  "title": "防跳步：未选门店就请求场次，Gate 拒绝，session 与写工具调用次数均为 0",
+  "steps": [
+    {"do": "gate", "tool": "query-party-store-session", "state": "S3",
+     "expect": {"exit": 3, "allowed": false}},
+    {"do": "gate", "tool": "query-party-store-date", "state": "S3",
+     "expect": {"exit": 3, "allowed": false}},
+    {"do": "gate", "tool": "party-order-create", "state": "S3",
+     "expect": {"exit": 3, "allowed": false}},
+    {"do": "script", "script": "state_machine.py", "capture": "tools",
+     "args": ["--tools", "S3"], "expect": {"exit": 0}}
+  ],
+  "assertions": [
+    {"type": "call_count", "tool": "query-party-store-session", "n": 0},
+    {"type": "call_count", "tool": "query-party-store-date", "n": 0},
+    {"type": "call_count", "tool": "party-order-create", "n": 0},
+    {"type": "call_count", "tool": "create-order", "n": 0},
+    {"type": "output_contains", "on": "tools", "text": "query-party-city"},
+    {"type": "output_not_contains", "on": "tools", "text": "query-party-store-session"}
+  ]
+}

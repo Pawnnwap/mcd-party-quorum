@@ -1,0 +1,34 @@
+{
+  "id": "C6",
+  "title": "发车进度：还差 2 人发车 / 已达起订人数则已成团",
+  "steps": [
+    {
+      "do": "script",
+      "script": "quorum_calc.py",
+      "capture": "need2",
+      "args": [
+        "--party-min", "5", "--party-max", "12", "--left-num", "12", "--confirmed", "3",
+        "--price-fen", "5900", "--date", "2026-10-23", "--now", "2026-10-18 23:07:42", "--json"
+      ],
+      "expect": {"exit": 0}
+    },
+    {
+      "do": "script",
+      "script": "quorum_calc.py",
+      "capture": "need0",
+      "args": [
+        "--party-min", "5", "--party-max", "12", "--left-num", "12", "--confirmed", "5",
+        "--price-fen", "5900", "--date", "2026-10-23", "--now", "2026-10-18 23:07:42", "--json"
+      ],
+      "expect": {"exit": 0}
+    }
+  ],
+  "assertions": [
+    {"type": "json_path_equals", "on": "need2", "path": "need", "value": 2},
+    {"type": "json_path_equals", "on": "need2", "path": "can_start", "value": false},
+    {"type": "output_contains", "on": "need2", "text": "还差 2 人发车"},
+    {"type": "json_path_equals", "on": "need0", "path": "need", "value": 0},
+    {"type": "json_path_equals", "on": "need0", "path": "can_start", "value": true},
+    {"type": "output_contains", "on": "need0", "text": "已成团，可发车"}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "code": 200,
+  "message": "请求成功",
+  "data": {
+    "spuId": 91003,
+    "spuName": "主题派对体验场（合成样例·两组时间字段都缺）",
+    "shopId": 5,
+    "status": 2
+  }
+}

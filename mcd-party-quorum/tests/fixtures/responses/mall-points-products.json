@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "code": 200,
+  "message": "请求成功",
+  "data": [
+    {
+      "spuId": 91001,
+      "spuName": "主题派对体验场（合成样例）",
+      "catName": "品鉴会",
+      "shopId": 5,
+      "point": "0",
+      "price": "59",
+      "selling": "合成样例卖点文案，仅供回归测试",
+      "spuImage": "https://img.mcd.cn/ecs/synthetic-91001.jpg",
+      "status": 2,
+      "upTime": "2026-10-17 10:30:00",
+      "downTime": "2026-10-25 23:49:59"
+    },
+    {
+      "spuId": 91002,
+      "spuName": "积分兑换周边（合成样例）",
+      "catName": "玩具",
+      "shopId": 2,
+      "point": "990",
+      "price": "0",
+      "selling": "积分兑换类，本技能不处理",
+      "spuImage": "https://img.mcd.cn/ecs/synthetic-91002.jpg",
+      "status": 2,
+      "upTime": "2026-10-01 00:00:00",
+      "downTime": "2026-12-31 23:59:59"
+    },
+    {
+      "spuId": 91003,
+      "spuName": "已下架派对（合成样例）",
+      "catName": "主题类派对",
+      "shopId": 5,
+      "point": "0",
+      "price": "99",
+      "selling": "已下架样例",
+      "spuImage": "https://img.mcd.cn/ecs/synthetic-91003.jpg",
+      "status": 1,
+      "upTime": "2026-09-01 00:00:00",
+      "downTime": "2026-09-30 23:59:59"
+    },
+    {
+      "spuId": 91004,
+      "spuName": "已过下架时间的派对（合成样例）",
+      "catName": "主题类派对",
+      "shopId": 5,
+      "point": "0",
+      "price": "79",
+      "selling": "过期样例",
+      "spuImage": "https://img.mcd.cn/ecs/synthetic-91004.jpg",
+      "status": 2,
+      "upTime": "2026-09-01 00:00:00",
+      "downTime": "2026-10-01 23:59:59"
+    }
+  ]
+}

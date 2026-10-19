@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "code": 200,
+  "message": "请求成功",
+  "data": {
+    "spuId": 91001,
+    "spuName": "主题派对体验场（合成样例）",
+    "images": ["https://img.mcd.cn/ecs/synthetic-91001.jpg"],
+    "shopId": 5,
+    "skuList": [
+      {
+        "skuId": 91011,
+        "extTradePrice": "0",
+        "points": "0",
+        "price": "59"
+      }
+    ],
+    "selling": "合成样例卖点文案，仅供回归测试",
+    "note": "<p><span>1. 活动时间：2026年10月23日至2026年10月25日，活动结束时间可能根据情况适当延长，具体活动餐厅可预约时间以活动预约页面为准。</span></p><p><span>2. 派对预约：请提前3天预订，具体可预约场次、时间以活动餐厅预约页面显示为准。</span></p><p><span>3. 适用人群：18岁以上的成年人。</span></p><p><span>4. 参与方式：每位费用 59 元，费用内含主食套餐与随机周边玩具 1 款，以及沉浸式派对体验。</span></p><p><span>5. 预约须知：1) 每场活动时间约90分钟。2) 每场需 5 位参与者起订，人数不足时将无法成功预定；每增加一位参与者增加59元；每场活动最高人数为12位。3) 退订或修改订单请至少于活动举办之日前3天申请。</span></p><p><span>6. 活动门店：本次活动不适用于港澳台地区门店，机场、火车站等交通枢纽餐厅、旅游景区餐厅等特殊餐厅除外。</span></p><p><span>7. 其他说明：具体活动信息以餐厅公示为准。</span></p>",
+    "detail": "合成样例详情文本",
+    "upDate": "2026-10-17 10:30:00",
+    "downDate": "2026-10-25 23:49:59",
+    "categoryRuleId": 0,
+    "spuCategory": "1",
+    "partyPeople": "5-12",
+    "partyAge": "18岁以上",
+    "partyRange": 3,
+    "partyType": -1,
+    "spuLimit": {
+      "ruleType": 1,
+      "rule": "每人限购数量",
+      "cycle": 999,
+      "limitCount": 2,
+      "baseCount": 1,
+      "limitSingle": 1
+    }
+  }
+}

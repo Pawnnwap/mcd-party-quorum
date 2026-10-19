@@ -1,0 +1,31 @@
+{
+  "id": "C12",
+  "title": "用户城市不在开放城市集合：列开放城市清单 + 引导，禁止编造门店",
+  "steps": [
+    {
+      "do": "script",
+      "script": "party_fields.py",
+      "capture": "city_text",
+      "args": ["--city-check", "--file", "tests/fixtures/responses/query-party-city.json",
+               "--city", "北京"],
+      "expect": {"exit": 0}
+    },
+    {
+      "do": "script",
+      "script": "party_fields.py",
+      "capture": "city_json",
+      "args": ["--city-check", "--file", "tests/fixtures/responses/query-party-city.json",
+               "--city", "北京", "--json"],
+      "expect": {"exit": 0}
+    },
+    {"do": "gate", "tool": "query-party-store", "state": "S10", "expect": {"exit": 3, "allowed": false}}
+  ],
+  "assertions": [
+    {"type": "json_path_equals", "on": "city_json", "path": "in_open_list", "value": false},
+    {"type": "output_contains", "on": "city_text", "text": "不在开放城市集合内"},
+    {"type": "output_contains", "on": "city_text", "text": "大连"},
+    {"type": "output_contains", "on": "city_text", "text": "西安"},
+    {"type": "output_contains", "on": "city_text", "text": "禁止编造门店"},
+    {"type": "call_count", "tool": "query-party-store", "n": 0}
+  ]
+}

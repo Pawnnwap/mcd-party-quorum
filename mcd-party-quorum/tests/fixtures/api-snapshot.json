@@ -1,0 +1,8 @@
+{
+  "date_range": {"start": "2026-10-22", "end": "2026-10-30"},
+  "price_fen": 5900,
+  "party_min": 5,
+  "party_max": 12,
+  "left_num": 12,
+  "duration_minutes": 90
+}

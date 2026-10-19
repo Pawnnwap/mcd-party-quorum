@@ -1,0 +1,26 @@
+{
+  "id": "C1",
+  "title": "活动雷达只列 shopId==5 的派对类活动，shopId==2 的积分兑换条目不出现",
+  "steps": [
+    {
+      "do": "script",
+      "script": "party_fields.py",
+      "capture": "filtered",
+      "args": [
+        "--filter-products",
+        "--file",
+        "tests/fixtures/responses/mall-points-products.json",
+        "--now",
+        "2026-10-18 23:07:42",
+        "--json"
+      ],
+      "expect": {"exit": 0}
+    }
+  ],
+  "assertions": [
+    {"type": "json_path_equals", "on": "filtered", "path": "kept_spu_ids", "value": [91001]},
+    {"type": "json_path_equals", "on": "filtered", "path": "dropped_spu_ids", "value": [91002, 91003, 91004]},
+    {"type": "json_path_equals", "on": "filtered", "path": "dropped.0.reason", "value": "shop_id_not_party"},
+    {"type": "output_contains", "on": "filtered", "text": "shopId=2"}
+  ]
+}

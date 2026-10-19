@@ -1,0 +1,42 @@
+{
+  "id": "C8",
+  "title": "金额单位：人均 ¥59 · 3 人共 ¥177，面向用户的卡面不得出现裸值 5900",
+  "steps": [
+    {
+      "do": "script",
+      "script": "quorum_calc.py",
+      "capture": "card",
+      "args": [
+        "--party-min", "5", "--party-max", "12", "--left-num", "12", "--confirmed", "3",
+        "--price-fen", "5900", "--date", "2026-10-23", "--now", "2026-10-18 23:07:42"
+      ],
+      "expect": {"exit": 0}
+    },
+    {
+      "do": "script",
+      "script": "quorum_calc.py",
+      "capture": "calc",
+      "args": [
+        "--party-min", "5", "--party-max", "12", "--left-num", "12", "--confirmed", "3",
+        "--price-fen", "5900", "--date", "2026-10-23", "--now", "2026-10-18 23:07:42", "--json"
+      ],
+      "expect": {"exit": 0}
+    },
+    {
+      "do": "script",
+      "script": "money.py",
+      "capture": "guard",
+      "args": ["--check", "人均 ¥59 · 3 人共 ¥177（每加 1 人 +¥59）", "--fen", "5900", "--fen", "17700"],
+      "expect": {"exit": 0}
+    }
+  ],
+  "assertions": [
+    {"type": "output_contains", "on": "card", "text": "¥59"},
+    {"type": "output_contains", "on": "card", "text": "¥177"},
+    {"type": "output_not_contains", "on": "card", "text": "5900"},
+    {"type": "output_not_contains", "on": "card", "text": "17700"},
+    {"type": "json_path_equals", "on": "calc", "path": "per_person_cny", "value": "¥59"},
+    {"type": "json_path_equals", "on": "calc", "path": "total_cny", "value": "¥177"},
+    {"type": "output_contains", "on": "guard", "text": "出口守卫通过"}
+  ]
+}

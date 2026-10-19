@@ -1,0 +1,31 @@
+{
+  "id": "T-incomplete-params",
+  "title": "接口缺 timeStart 与 timeEnd：order_params 退出码 2 并列出缺失清单，禁止静默填默认值",
+  "steps": [
+    {
+      "do": "script",
+      "script": "order_params.py",
+      "capture": "missing",
+      "args": ["--from", "tests/fixtures/order-params-missing-time.json",
+               "--schema", "tests/fixtures/party-order-create-schema.json"],
+      "expect": {"exit": 2}
+    },
+    {
+      "do": "script",
+      "script": "order_params.py",
+      "capture": "missing_json",
+      "args": ["--from", "tests/fixtures/order-params-missing-time.json",
+               "--schema", "tests/fixtures/party-order-create-schema.json", "--json"],
+      "expect": {"exit": 2}
+    }
+  ],
+  "assertions": [
+    {"type": "output_contains", "on": "missing", "text": "缺少字段 timeStart"},
+    {"type": "output_contains", "on": "missing", "text": "缺少字段 timeEnd"},
+    {"type": "output_contains", "on": "missing", "text": "对齐校验未通过"},
+    {"type": "output_not_contains", "on": "missing", "text": "默认值"},
+    {"type": "output_not_contains", "on": "missing", "text": "已自动补全"},
+    {"type": "json_path_equals", "on": "missing_json", "path": "complete", "value": false},
+    {"type": "call_count", "tool": "party-order-create", "n": 0}
+  ]
+}

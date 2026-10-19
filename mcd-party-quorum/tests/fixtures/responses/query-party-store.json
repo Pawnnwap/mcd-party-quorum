@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "code": 200,
+  "message": "请求成功",
+  "data": [
+    {
+      "code": "9001001",
+      "name": "合成样例餐厅·西湖店",
+      "shortName": "西湖店",
+      "address": "杭州市上城区合成路 1 号",
+      "cityCode": "330100",
+      "cityName": "杭州",
+      "distance": 1180.0,
+      "distanceText": "1.18km",
+      "businessStatus": 1,
+      "onlineBusinessStatus": 1,
+      "latitude": "30.2594",
+      "longitude": "120.1651"
+    },
+    {
+      "code": "9001002",
+      "name": "合成样例餐厅·滨江店",
+      "shortName": "滨江店",
+      "address": "杭州市滨江区合成大道 2 号",
+      "cityCode": "330100",
+      "cityName": "杭州",
+      "distance": 3620.0,
+      "distanceText": "3.62km",
+      "businessStatus": 1,
+      "onlineBusinessStatus": 1,
+      "latitude": "30.2084",
+      "longitude": "120.2121"
+    },
+    {
+      "code": "9001003",
+      "name": "合成样例餐厅·未来科技城店",
+      "shortName": "科技城店",
+      "address": "杭州市余杭区合成街 3 号",
+      "cityCode": "330100",
+      "cityName": "杭州",
+      "distance": 12400.0,
+      "distanceText": "12.4km",
+      "businessStatus": 1,
+      "onlineBusinessStatus": 1,
+      "latitude": "30.2791",
+      "longitude": "119.9742"
+    }
+  ]
+}

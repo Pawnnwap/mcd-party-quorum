@@ -1,0 +1,44 @@
+{
+  "id": "C13",
+  "title": "活动已下架 / 已过下架时间：明确告知不可预约，不得展示场次",
+  "steps": [
+    {
+      "do": "script",
+      "script": "party_fields.py",
+      "capture": "expired_json",
+      "args": ["--filter-products",
+               "--file", "tests/fixtures/responses/mall-points-products.json",
+               "--now", "2026-11-01 10:00:00", "--json"],
+      "expect": {"exit": 0}
+    },
+    {
+      "do": "script",
+      "script": "party_fields.py",
+      "capture": "expired_text",
+      "args": ["--filter-products",
+               "--file", "tests/fixtures/responses/mall-points-products.json",
+               "--now", "2026-11-01 10:00:00"],
+      "expect": {"exit": 0}
+    },
+    {
+      "do": "script",
+      "script": "party_fields.py",
+      "capture": "window",
+      "args": ["--sale-window",
+               "--file", "tests/fixtures/responses/mall-product-detail.json",
+               "--now", "2026-10-26 10:00:00", "--json"],
+      "expect": {"exit": 0}
+    },
+    {"do": "transition", "from": "S1", "event": "not_onsale", "expect": {"next_state": "S10"}},
+    {"do": "gate", "tool": "query-party-store-session", "state": "S10", "expect": {"exit": 3, "allowed": false}}
+  ],
+  "assertions": [
+    {"type": "json_path_equals", "on": "expired_json", "path": "outcome", "value": "empty"},
+    {"type": "json_path_equals", "on": "expired_json", "path": "kept_spu_ids", "value": []},
+    {"type": "output_contains", "on": "expired_text", "text": "当前没有可预约的派对活动"},
+    {"type": "json_path_equals", "on": "window", "path": "on_sale", "value": false},
+    {"type": "json_path_equals", "on": "window", "path": "window_source", "value": "upDate/downDate"},
+    {"type": "call_count", "tool": "query-party-store-session", "n": 0},
+    {"type": "outcome", "value": "degraded"}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "code": 200,
+  "message": "请求成功",
+  "data": {
+    "formatted": "2026-10-18 23:07:42",
+    "date": "2026-10-18",
+    "year": 2026,
+    "month": 10,
+    "day": 18,
+    "dayOfWeek": "SUNDAY",
+    "timezone": "GMT+08:00",
+    "timestamp": 1792345662000
+  }
+}

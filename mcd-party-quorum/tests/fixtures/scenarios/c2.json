@@ -1,0 +1,19 @@
+{
+  "id": "C2",
+  "title": "技能源码、references、SKILL.md 与 requirements.txt 中零命中硬编码活动 ID",
+  "note": "pattern 写成 18[0-9]29 而非字面量，是为了让 fixtures 自身不成为命中项——整个技能目录对硬编码活动 ID 保持零命中。",
+  "steps": [
+    {
+      "do": "grep",
+      "pattern": "18[0-9]29",
+      "scope": ["scripts", "references", "SKILL.md", "requirements.txt"],
+      "expect": {"count": 0}
+    },
+    {
+      "do": "grep",
+      "pattern": "18[0-9]29",
+      "expect": {"count": 0}
+    }
+  ],
+  "assertions": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "C11",
+  "title": "429 退避：连续三次给出重试动作，第 4 次明确失败且不再给出重试指令",
+  "steps": [
+    {"do": "backoff", "attempt": 1, "capture": "a1", "expect": {"exit": 0, "should_retry": true}},
+    {"do": "backoff", "attempt": 2, "capture": "a2", "expect": {"exit": 0, "should_retry": true}},
+    {"do": "backoff", "attempt": 3, "capture": "a3", "expect": {"exit": 0, "should_retry": true}},
+    {"do": "backoff", "attempt": 4, "capture": "a4", "expect": {"exit": 4, "should_retry": false}},
+    {"do": "transition", "from": "S6", "event": "rate_limited", "expect": {"next_state": "S10"}}
+  ],
+  "assertions": [
+    {"type": "json_path_equals", "on": "a1", "path": "delay_seconds", "value": 2},
+    {"type": "json_path_equals", "on": "a2", "path": "delay_seconds", "value": 4},
+    {"type": "json_path_equals", "on": "a3", "path": "delay_seconds", "value": 8},
+    {"type": "output_contains", "on": "a4", "text": "请求过于频繁"},
+    {"type": "output_not_contains", "on": "a4", "text": "重试"},
+    {"type": "json_path_equals", "on": "a4", "path": "next_action", "value": "stop_and_report"},
+    {"type": "outcome", "value": "degraded"}
+  ]
+}

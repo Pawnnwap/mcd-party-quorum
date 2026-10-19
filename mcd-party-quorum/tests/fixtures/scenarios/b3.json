@@ -1,0 +1,27 @@
+{
+  "id": "B3",
+  "title": "零写操作：7 个写工具一律被 Gate 拦截，调用次数全部为 0",
+  "steps": [
+    {"do": "gate", "tool": "party-order-create", "state": "S9", "capture": "gate_write",
+     "expect": {"exit": 3, "allowed": false}},
+    {"do": "gate", "tool": "create-order", "state": "S9", "expect": {"exit": 3, "allowed": false}},
+    {"do": "gate", "tool": "mall-create-order", "state": "S9", "expect": {"exit": 3, "allowed": false}},
+    {"do": "gate", "tool": "draw-lottery", "state": "S9", "expect": {"exit": 3, "allowed": false}},
+    {"do": "gate", "tool": "cancel-order", "state": "S9", "expect": {"exit": 3, "allowed": false}},
+    {"do": "gate", "tool": "delivery-create-address", "state": "S9", "expect": {"exit": 3, "allowed": false}},
+    {"do": "gate", "tool": "auto-bind-coupons", "state": "S9", "expect": {"exit": 3, "allowed": false}},
+    {"do": "transition", "from": "S9", "event": "write_op_requested", "expect": {"next_state": "S11"}}
+  ],
+  "assertions": [
+    {"type": "call_count", "tool": "party-order-create", "n": 0},
+    {"type": "call_count", "tool": "create-order", "n": 0},
+    {"type": "call_count", "tool": "mall-create-order", "n": 0},
+    {"type": "call_count", "tool": "draw-lottery", "n": 0},
+    {"type": "call_count", "tool": "cancel-order", "n": 0},
+    {"type": "call_count", "tool": "delivery-create-address", "n": 0},
+    {"type": "call_count", "tool": "auto-bind-coupons", "n": 0},
+    {"type": "outcome", "value": "refused"},
+    {"type": "output_contains", "on": "gate_write", "text": "write_blocked"},
+    {"type": "output_contains", "on": "gate_write", "text": "7 个写工具黑名单"}
+  ]
+}

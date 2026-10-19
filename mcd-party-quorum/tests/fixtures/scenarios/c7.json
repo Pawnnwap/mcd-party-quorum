@@ -1,0 +1,25 @@
+{
+  "id": "C7",
+  "title": "人数超上限：出可执行修正建议，不出组局卡",
+  "steps": [
+    {
+      "do": "script",
+      "script": "quorum_calc.py",
+      "capture": "over",
+      "outcome_from_json": true,
+      "args": [
+        "--party-min", "5", "--party-max", "12", "--left-num", "4", "--confirmed", "6",
+        "--price-fen", "5900", "--date", "2026-10-23", "--now", "2026-10-18 23:07:42", "--json"
+      ],
+      "expect": {"exit": 0}
+    }
+  ],
+  "assertions": [
+    {"type": "json_path_equals", "on": "over", "path": "cap", "value": 4},
+    {"type": "json_path_equals", "on": "over", "path": "over_cap", "value": true},
+    {"type": "json_path_equals", "on": "over", "path": "outcome", "value": "blocked"},
+    {"type": "output_not_contains", "on": "over", "text": "组局卡"},
+    {"type": "output_contains", "on": "over", "text": "拆成两场"},
+    {"type": "outcome", "value": "blocked"}
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "C4",
+  "title": "城市层空态：出降级卡，且 query-party-store 调用次数为 0（空态不产生下一跳）",
+  "overrides": {"query-party-city": {"data": []}},
+  "steps": [
+    {"do": "gate", "tool": "query-party-city", "state": "S3",
+     "expect": {"exit": 0, "allowed": true}},
+    {"do": "invoke", "tool": "query-party-city", "state": "S3",
+     "params": {"spuId": 91001}, "set_state_if_empty": "S10"},
+    {"do": "script", "script": "party_fields.py", "capture": "empty_check",
+     "args": ["--is-empty", "--file", "tests/fixtures/empty-city.json",
+              "--tool", "query-party-city", "--json"],
+     "expect": {"exit": 0}},
+    {"do": "transition", "from": "S3", "event": "cities_empty", "expect": {"next_state": "S10"}},
+    {"do": "gate", "tool": "query-party-store", "state": "S10",
+     "expect": {"exit": 3, "allowed": false}},
+    {"do": "gate", "tool": "query-party-store-session", "state": "S10",
+     "expect": {"exit": 3, "allowed": false}}
+  ],
+  "assertions": [
+    {"type": "call_count", "tool": "query-party-city", "n": 1},
+    {"type": "call_count", "tool": "query-party-store", "n": 0},
+    {"type": "call_count", "tool": "query-party-store-date", "n": 0},
+    {"type": "call_count", "tool": "query-party-store-session", "n": 0},
+    {"type": "outcome", "value": "degraded"},
+    {"type": "output_contains", "on": "empty_check", "text": "empty"}
+  ]
+}

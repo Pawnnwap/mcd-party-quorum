@@ -1,0 +1,29 @@
+{
+  "id": "T-crosscheck-both-sides",
+  "title": "文案含延期条款且起点一致：判 match 并引用 note 原文延期条款",
+  "note": "note 写 10/22 至 10/25 并自带「结束时间可能延长」条款，接口返回 10/22 至 10/30 —— 文案自己授权了延长，不构成冲突。",
+  "steps": [
+    {
+      "do": "script",
+      "script": "note_locate.py",
+      "capture": "cross",
+      "args": [
+        "--crosscheck",
+        "--note",
+        "tests/fixtures/note-with-extension.json",
+        "--api",
+        "tests/fixtures/api-snapshot.json"
+      ],
+      "expect": {"exit": 0}
+    }
+  ],
+  "assertions": [
+    {"type": "output_contains", "on": "cross", "text": "✅ 一致"},
+    {"type": "output_not_contains", "on": "cross", "text": "⚠️ 冲突"},
+    {"type": "output_contains", "on": "cross", "text": "活动结束时间可能根据情况适当延长"},
+    {"type": "output_contains", "on": "cross", "text": "官方文案原文含延期条款"},
+    {"type": "output_contains", "on": "cross", "text": "2026-10-22"},
+    {"type": "output_contains", "on": "cross", "text": "所有校验以预约/下单接口返回结果为准"},
+    {"type": "output_not_contains", "on": "cross", "text": "以接口数据为准"}
+  ]
+}

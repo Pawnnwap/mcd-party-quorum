@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "code": 200,
+  "message": "请求成功",
+  "data": [
+    {"code": "210200", "name": "大连", "initial": "D", "latitude": "38.9140", "longitude": "121.6147", "sortNo": 1},
+    {"code": "320100", "name": "南京", "initial": "N", "latitude": "32.0603", "longitude": "118.7969", "sortNo": 2},
+    {"code": "320200", "name": "无锡", "initial": "W", "latitude": "31.4912", "longitude": "120.3119", "sortNo": 3},
+    {"code": "320500", "name": "苏州", "initial": "S", "latitude": "31.2989", "longitude": "120.5853", "sortNo": 4},
+    {"code": "330100", "name": "杭州", "initial": "H", "latitude": "30.2741", "longitude": "120.1551", "sortNo": 5},
+    {"code": "350100", "name": "福州", "initial": "F", "latitude": "26.0745", "longitude": "119.2965", "sortNo": 6},
+    {"code": "430100", "name": "长沙", "initial": "C", "latitude": "28.2282", "longitude": "112.9388", "sortNo": 7},
+    {"code": "440600", "name": "佛山", "initial": "F", "latitude": "23.0215", "longitude": "113.1218", "sortNo": 8},
+    {"code": "610100", "name": "西安", "initial": "X", "latitude": "34.3416", "longitude": "108.9398", "sortNo": 9}
+  ]
+}

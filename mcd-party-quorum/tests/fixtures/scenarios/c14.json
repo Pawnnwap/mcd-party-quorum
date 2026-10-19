@@ -1,0 +1,40 @@
+{
+  "id": "C14",
+  "title": "下单参数清单与 party-order-create schema 完全对齐，无缺项、无臆造值",
+  "steps": [
+    {
+      "do": "script",
+      "script": "order_params.py",
+      "capture": "params_json",
+      "args": ["--from", "tests/fixtures/order-params.json",
+               "--schema", "tests/fixtures/party-order-create-schema.json", "--json"],
+      "expect": {"exit": 0}
+    },
+    {
+      "do": "script",
+      "script": "order_params.py",
+      "capture": "params_text",
+      "args": ["--from", "tests/fixtures/order-params.json",
+               "--schema", "tests/fixtures/party-order-create-schema.json"],
+      "expect": {"exit": 0}
+    },
+    {
+      "do": "script",
+      "script": "order_params.py",
+      "capture": "params_fields",
+      "args": ["--fields"],
+      "expect": {"exit": 0}
+    }
+  ],
+  "assertions": [
+    {"type": "json_path_equals", "on": "params_json", "path": "complete", "value": true},
+    {"type": "json_path_equals", "on": "params_json", "path": "errors", "value": []},
+    {"type": "json_path_equals", "on": "params_json", "path": "extra", "value": []},
+    {"type": "output_not_contains", "on": "params_json", "text": "agent_invented"},
+    {"type": "output_contains", "on": "params_text", "text": "本技能不会代你执行"},
+    {"type": "output_contains", "on": "params_text", "text": "api"},
+    {"type": "output_contains", "on": "params_text", "text": "user"},
+    {"type": "output_contains", "on": "params_fields", "text": "partyType"},
+    {"type": "call_count", "tool": "party-order-create", "n": 0}
+  ]
+}

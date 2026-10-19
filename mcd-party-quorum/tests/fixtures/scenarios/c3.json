@@ -1,0 +1,33 @@
+{
+  "id": "C3",
+  "title": "官方文案与实时数据冲突：标 conflict + 警示，双方都不断言，给保守建议",
+  "steps": [
+    {
+      "do": "script",
+      "script": "note_locate.py",
+      "capture": "cross",
+      "args": [
+        "--crosscheck",
+        "--note",
+        "tests/fixtures/responses/mall-product-detail.json",
+        "--api",
+        "tests/fixtures/api-snapshot.json"
+      ],
+      "expect": {"exit": 0}
+    }
+  ],
+  "assertions": [
+    {"type": "output_contains", "on": "cross", "text": "⚠️ 冲突"},
+    {"type": "output_contains", "on": "cross", "text": "2026年10月23日"},
+    {"type": "output_contains", "on": "cross", "text": "以门店最终确认为准"},
+    {"type": "output_contains", "on": "cross", "text": "所有校验以预约/下单接口返回结果为准"},
+    {"type": "output_not_contains", "on": "cross", "text": "以接口数据为准"},
+    {"type": "output_not_contains", "on": "cross", "text": "官方文案有误"},
+    {"type": "output_contains", "on": "cross", "text": "门店排期"},
+    {"type": "output_contains", "on": "cross", "text": "并非数据错误"},
+    {"type": "output_contains", "on": "cross", "text": "不同门店可约范围可能不同"},
+    {"type": "output_contains", "on": "cross", "text": "以该门店预约页面为准"},
+    {"type": "output_not_contains", "on": "cross", "text": "有误"},
+    {"type": "output_not_contains", "on": "cross", "text": "异常"}
+  ]
+}

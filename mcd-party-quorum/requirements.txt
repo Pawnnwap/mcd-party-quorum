@@ -1,0 +1,12 @@
+# mcd-party-quorum 依赖声明
+#
+# 必需第三方依赖：无。
+#   本技能全部脚本仅使用 Python 标准库（argparse / datetime / decimal / hashlib /
+#   html / io / json / pathlib / re / subprocess / sys / tempfile / unittest 级能力），
+#   不发起任何 HTTP 请求，不持有任何凭据。
+#
+# 可选增强：无。
+#   不读 YAML、不解析 frontmatter（结构校验交给 skill-lifecycle-toolkit 的
+#   validate_skill.py），因此在无 PyYAML 的托管运行时下同样可用。
+#
+# 运行要求：Python 3.8 及以上。

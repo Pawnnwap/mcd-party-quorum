@@ -1,0 +1,33 @@
+{
+  "id": "C9",
+  "title": "partyType 为 -1 必须反问包场 / 拼团；1 或 2 不再反问",
+  "steps": [
+    {
+      "do": "script",
+      "script": "state_machine.py",
+      "capture": "ask",
+      "args": ["--state", "S6", "--event", "user_selected_session", "--party-type", "-1", "--json"],
+      "expect": {"exit": 0}
+    },
+    {
+      "do": "script",
+      "script": "state_machine.py",
+      "capture": "direct",
+      "args": ["--state", "S6", "--event", "user_selected_session", "--party-type", "1", "--json"],
+      "expect": {"exit": 0}
+    },
+    {
+      "do": "script",
+      "script": "state_machine.py",
+      "capture": "missing",
+      "args": ["--state", "S6", "--event", "user_selected_session", "--json"],
+      "expect": {"exit": 0}
+    }
+  ],
+  "assertions": [
+    {"type": "json_path_equals", "on": "ask", "path": "next_state", "value": "S7"},
+    {"type": "json_path_equals", "on": "direct", "path": "next_state", "value": "S8"},
+    {"type": "json_path_equals", "on": "missing", "path": "outcome", "value": "need_input"},
+    {"type": "output_contains", "on": "missing", "text": "不得替用户选"}
+  ]
+}

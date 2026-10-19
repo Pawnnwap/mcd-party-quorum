@@ -1,0 +1,25 @@
+{
+  "id": "C10",
+  "title": "死线口径：场次日期减去 3 个自然日，时刻 23:59:59，标 advisory",
+  "steps": [
+    {
+      "do": "script",
+      "script": "quorum_calc.py",
+      "capture": "calc",
+      "args": [
+        "--party-min", "5", "--party-max", "12", "--left-num", "12", "--confirmed", "3",
+        "--price-fen", "5900", "--date", "2026-10-23", "--now", "2026-10-18 23:07:42",
+        "--lead-days", "3", "--json"
+      ],
+      "expect": {"exit": 0}
+    }
+  ],
+  "assertions": [
+    {"type": "json_path_equals", "on": "calc", "path": "deadline_date", "value": "2026-10-20"},
+    {"type": "json_path_equals", "on": "calc", "path": "deadline", "value": "2026-10-20 23:59:59"},
+    {"type": "json_path_equals", "on": "calc", "path": "deadline_kind", "value": "advisory"},
+    {"type": "json_path_equals", "on": "calc", "path": "hours_left", "value": 48.87},
+    {"type": "output_contains", "on": "calc", "text": "还剩 48 小时 52 分"},
+    {"type": "output_contains", "on": "calc", "text": "实际可约日期与场次请以预约页面 / 门店确认为准"}
+  ]
+}

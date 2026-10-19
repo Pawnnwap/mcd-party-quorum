@@ -1,0 +1,15 @@
+{
+  "required": [
+    "code",
+    "count",
+    "dateStr",
+    "id",
+    "leftNum",
+    "partyType",
+    "skuId",
+    "spuId",
+    "storeCode",
+    "timeEnd",
+    "timeStart"
+  ]
+}
